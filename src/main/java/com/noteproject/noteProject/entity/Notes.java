@@ -1,37 +1,25 @@
 package com.noteproject.noteProject.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Data
+@Table(name = "Notes")
 public class Notes {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long noteId;
+    @Column(name = "NOTE_ID")
+    private Long noteId;
+    public String description;
 
-    public  String description;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "USER_ID", unique = false)
+    private User user;
 
-    public Notes(long noteId, String description) {
-        this.noteId = noteId;
-        this.description = description;
-    }
-
-    public Notes(){
-
-    }
-
-    public long getNoteId() {
-        return noteId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

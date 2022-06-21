@@ -10,4 +10,12 @@ public interface NotesService {
     List<Notes> getNotes();
 
     void deleteNoteById(Long notesId);
+
+    Notes getNotesById(Long id);
+
+    List<Notes> getByUserName(String userName);
+
+    Notes updateNotesById(Long id, Notes notes);
+
+//    List<Notes> getNotesByUserId(String user_id);
 }

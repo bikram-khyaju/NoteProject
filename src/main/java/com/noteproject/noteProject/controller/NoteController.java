@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class NoteController {
@@ -23,11 +24,26 @@ public class NoteController {
         return notesService.getNotes();
     }
 
+    @GetMapping("/notes/{id}")
+    public Notes getNotesById(@PathVariable("id") Long id){
+        return notesService.getNotesById(id);
+    }
+
+    @GetMapping("/notesByUserName/{userName}")
+        public List<Notes> getByUserName(@PathVariable("userName") String userName){
+        return notesService.getByUserName(userName);
+        }
+
     @DeleteMapping("/delete/{id}")
     public String deleteNoteById(@PathVariable("id") Long notesId){
         notesService.deleteNoteById(notesId);
         return "Delete Successfully!!!";
 
+    }
+
+    @PutMapping("notes/{id}")
+    public Notes updateNotesById(@PathVariable("id") Long id, @RequestBody Notes notes){
+       return notesService.updateNotesById(id,notes);
     }
 
 }
